@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  w4-mongodb:
+    image: mongo
+    container_name: w4-mongodb
+    env_file:
+      - .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
+    ports:
+      - "27017:27017"
+    volumes:
+      - "./database/script.js:/docker-entrypoint-initdb.d/script.js:ro"
