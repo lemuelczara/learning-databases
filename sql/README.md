@@ -58,10 +58,11 @@ AND act.id = act_mov.actor_id
 GROUP BY act.first_name, act.last_name;
 ```
 
-
 - 📖 Adicione um filme à tabela de filmes.
 
 ```sql
+INSERT INTO movies(created_at, updated_at, title, rating, awards, release_date, length,	genre_id) 
+VALUES(null, null, 'Homem-Aranha: Sem Volta para Casa', 9.2, 1, '2021-12-16', 137, 8);
 ```
 
 <br>
@@ -69,14 +70,29 @@ GROUP BY act.first_name, act.last_name;
 - 📖 Adicione um gênero à tabela de gêneros.
 
 ```sql
+INSERT INTO genres(created_at, updated_at, name, ranking, active)
+VALUES(CURRENT_TIMESTAMP, null, 'Romance', 13, 1);
 ```
 
 <br>
 
-- 📖 Associe o filme do Ex 2. ao gênero criado no Ex. 3.- 📖Modifique a tabela de atores para que pelo menos um ator tenha
+- 📖 Associe o filme do Ex 2. ao gênero criado no Ex. 3.
+
+```sql
+UPDATE movies 
+SET genre_id = 13 
+WHERE id = 22;
+```
+
+<br>
+
+- 📖 Modifique a tabela de atores para que pelo menos um ator tenha
 como favorito o filme adicionado no Ex. 2.
 
 ```sql
+UPDATE actors 
+SET favorite_movie_id = 22 
+WHERE id = 44;
 ```
 
 <br>
@@ -84,6 +100,7 @@ como favorito o filme adicionado no Ex. 2.
 - 📖 Crie uma cópia temporária da tabela de filmes.
 
 ```sql
+SELECT * INTO TEMP TABLE temp_movies FROM movies;
 ```
 
 <br>
@@ -92,6 +109,7 @@ como favorito o filme adicionado no Ex. 2.
 menos de 5 prêmios.
 
 ```sql
+DELETE FROM temp_movies WHERE awards < 5;
 ```
 
 <br>
@@ -100,6 +118,9 @@ menos de 5 prêmios.
 filme.
 
 ```sql
+SELECT DISTINCT g.id, g.name 
+FROM genres g, movies m
+WHERE g.id = m.genre_id;
 ```
 
 <br>
@@ -108,6 +129,14 @@ filme.
 prêmios.
 
 ```sql
+SELECT DISTINCT a.first_name, a.last_name
+FROM actors a, movies m
+WHERE a.favorite_movie_id = m.id
+AND m.awards > 3;
+
+EXPLAIN SELECT DISTINCT g.id, g.name 
+FROM genres g, movies m
+WHERE g.id = m.genre_id;10ADASD
 ```
 
 <br>
@@ -115,20 +144,28 @@ prêmios.
 - 📖 Use o plano de execução para analisar as consultas nos Ex 6 e 7.
 
 ```sql
+EXPLAIN SELECT DISTINCT g.id, g.name 
+FROM genres g, movies m
+WHERE g.id = m.genre_id;
+
+EXPLAIN SELECT a.first_name, a.last_name, m.title 
+FROM actors a, movies m
+WHERE a.favorite_movie_id = m.id
+AND m.awards > 3;
 ```
 
 <br>
 
 - 📖 O que são os índices? Para que servem?
 
-```sql
-```
+Os índices são usados para recuperar dados do banco de dados mais rapidamente do que de outra forma. Os usuários não podem ver os índices, eles são usado apenas para acelerar as buscas/consultas.
 
 <br>
 
 - 📖 Crie um índice sobre o nome na tabela de filmes.
 
 ```sql
+CREATE INDEX idx_title ON movies (title);
 ```
 
 <br>
@@ -136,6 +173,10 @@ prêmios.
 - 📖 Verifique se o índice foi criado corretamente.
 
 ```sql
+SELECT tablename, indexname, indexdef
+FROM pg_indexes
+WHERE schemaname = 'public'	AND tablename = 'movies'
+ORDER BY tablename,	indexname;
 ```
 
 <br>
