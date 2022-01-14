@@ -4,6 +4,8 @@ services:
   w4-postgres:
     image: postgres
     container_name: w4-postgres
+    env_file:
+      - .env
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -12,6 +14,7 @@ services:
       - "5432:5432"
     volumes:
       - "./database/script.sql:/docker-entrypoint-initdb.d/init.sql"
+      - "w4-postgres-data:/var/lib/postgresql/data"
     networks:
       - w4-postgres-pgadmin-network
 
@@ -31,3 +34,6 @@ services:
 networks:
   w4-postgres-pgadmin-network:
     driver: bridge
+
+volumes:
+  w4-postgres-data:

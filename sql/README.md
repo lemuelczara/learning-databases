@@ -57,3 +57,85 @@ AND mov.id = act_mov.movie_id
 AND act.id = act_mov.actor_id
 GROUP BY act.first_name, act.last_name;
 ```
+
+
+- 📖 Adicione um filme à tabela de filmes.
+
+```sql
+```
+
+<br>
+
+- 📖 Adicione um gênero à tabela de gêneros.
+
+```sql
+```
+
+<br>
+
+- 📖 Associe o filme do Ex 2. ao gênero criado no Ex. 3.- 📖Modifique a tabela de atores para que pelo menos um ator tenha
+como favorito o filme adicionado no Ex. 2.
+
+```sql
+```
+
+<br>
+
+- 📖 Crie uma cópia temporária da tabela de filmes.
+
+```sql
+```
+
+<br>
+
+- 📖 Elimine desta tabela temporária todos os filmes que ganharam
+menos de 5 prêmios.
+
+```sql
+```
+
+<br>
+
+- 📖 Obtenha a lista de todos os gêneros que possuem pelo menos um
+filme.
+
+```sql
+```
+
+<br>
+
+- 📖 Obtenha a lista de atores cujo filme favorito ganhou mais de 3
+prêmios.
+
+```sql
+```
+
+<br>
+
+- 📖 Use o plano de execução para analisar as consultas nos Ex 6 e 7.
+
+```sql
+```
+
+<br>
+
+- 📖 O que são os índices? Para que servem?
+
+```sql
+```
+
+<br>
+
+- 📖 Crie um índice sobre o nome na tabela de filmes.
+
+```sql
+```
+
+<br>
+
+- 📖 Verifique se o índice foi criado corretamente.
+
+```sql
+```
+
+<br>

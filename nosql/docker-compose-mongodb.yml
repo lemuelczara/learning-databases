@@ -13,3 +13,9 @@ services:
       - "27017:27017"
     volumes:
       - "./database/script.js:/docker-entrypoint-initdb.d/script.js:ro"
+      - "w4-mongodb-db:/data/db"
+      - "w4-mongodb-configdb:/data/configdb"
+
+volumes:
+  w4-mongodb-db:
+  w4-mongodb-configdb:
